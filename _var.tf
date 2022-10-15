@@ -1,7 +1,7 @@
 variable "allow_external_principals" {
   description = "Whether or not to allow principals from outside your organization to participate in this share"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "associated_principals" {
