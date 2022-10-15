@@ -8,15 +8,15 @@ resource "aws_ram_resource_share" "share" {
 }
 
 resource "aws_ram_resource_association" "resource_association" {
-  for_each = toset(var.associated_resources)
+  count = length(var.associated_resources)
 
   resource_share_arn = aws_ram_resource_share.share.arn
-  resource_arn       = each.key
+  resource_arn       = var.associated_resources[count.index]
 }
 
 resource "aws_ram_principal_association" "principal_association" {
-  for_each = toset(var.associated_principals)
+  count = length(var.associated_principals)
 
   resource_share_arn = aws_ram_resource_share.share.arn
-  principal          = each.key
+  principal          = var.associated_principals[count.index]
 }
